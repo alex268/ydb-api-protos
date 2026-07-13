@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package Ydb.Bridge.V1;
+
+option java_package = "tech.ydb.proto.draft.bridge.v1";
+option go_package = "github.com/ydb-platform/ydb-go-genproto/draft/Ydb_Bridge_V1";
+
+import "draft/protos/ydb_bridge.proto";
+
+// Service for managing cluster in bridge mode
+service BridgeService {
+
+    // Get current cluster state
+    // Useful for monitoring and decision-making before state changes
+    rpc GetClusterState(Ydb.Bridge.GetClusterStateRequest) returns (Ydb.Bridge.GetClusterStateResponse);
+
+    // Update cluster state by providing a list of desired pile states
+    // This is the main operation for failover and promotion scenarios
+    rpc UpdateClusterState(Ydb.Bridge.UpdateClusterStateRequest) returns (Ydb.Bridge.UpdateClusterStateResponse);
+
+}
